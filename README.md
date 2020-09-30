@@ -16,7 +16,7 @@ This is a framework repo for automating mobile application using python with pyt
 
 **Project Structure**
 1. base - It contains all the web/appium drivers, common functions and workers functions
-2. resources - It contains all the apk paths and url configurations which will be used throughout the project
+2. resources - It contains all the apk's and url configurations which will be used throughout the project
 3. pages - It contains all the pages class and their methods to implement POM
 4. tests - It contains all the flow class and their calling functions using pytest
 5. screenshots - We will store all our screenshots in this folder

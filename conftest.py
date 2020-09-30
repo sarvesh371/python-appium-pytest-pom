@@ -276,7 +276,7 @@ def web_driver():
     Fixture to initialise the web driver
     :return:
     """
-    driver = WebDriver(browser='chrome')
+    driver = WebDriver(browser='android')
     yield driver
     try:
         driver.driver.close()
