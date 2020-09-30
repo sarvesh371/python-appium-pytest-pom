@@ -10,15 +10,13 @@ class TestFlipkart:
     This suite is created to test and automate the flipkart flow
     """
 
-    def test_01_launch_flipkart(self, web_driver, pages, resources):
+    def test_01_launch_flipkart(self, web_driver, pages):
         """
         Load flipkart website
         :return:
         :param web_driver
         :param pages
-        :param resources
         """
-        web_driver.open_website(url=resources.url.flipkart)
         web_driver.allure_attach_jpeg(file_name='homePage')
         pages.home.close_pop_up()
 
@@ -30,7 +28,6 @@ class TestFlipkart:
         :param web_driver
         """
         pages.home.search_apple()
-        pages.home.click_search()
         web_driver.allure_attach_jpeg(file_name='searchResults')
 
     def test_03_print_result(self, pages):
@@ -39,4 +36,5 @@ class TestFlipkart:
         :return:
         :param pages
         """
+        pages.search.close_location_pop_up()
         pages.search.print_search_results()

@@ -15,9 +15,9 @@ class HomePage:
         """
         self.webDriver = web_driver
         self.locators = dict_to_ns({
-            "closePopUp": "//*[@class='_2AkmmA _29YdH8']",
-            "searchBox": "//input[@class='LM6RPg']",
-            "searchButton": "//button[@class='vh79eN']",
+            "closePopUp": "com.flipkart.android:id/btn_skip",
+            "searchBoxWrite": "com.flipkart.android:id/search_autoCompleteTextView",
+            "searchBox": "//*[@resource-id='com.flipkart.android:id/search_widget_textbox']",
         })
 
     def close_pop_up(self):
@@ -25,18 +25,15 @@ class HomePage:
         Close the signup pop up
         :return:
         """
-        self.webDriver.click(element=self.locators.closePopUp, locator_type='xpath')
+        self.webDriver.click(element=self.locators.closePopUp, locator_type='id')
 
     def search_apple(self):
         """
         Search Apple
         :return:
         """
-        self.webDriver.set_text(element=self.locators.searchBox, locator_type='xpath', text='apple')
-
-    def click_search(self):
-        """
-        Click the search button
-        :return:
-        """
-        self.webDriver.click(element=self.locators.searchButton, locator_type='xpath')
+        self.webDriver.explicit_visibility_of_element(element=self.locators.searchBox, locator_type='xpath',
+                                                      time_out=60)
+        self.webDriver.click(element=self.locators.searchBox, locator_type='xpath')
+        self.webDriver.set_text(element=self.locators.searchBoxWrite, locator_type='id', text='apple')
+        self.webDriver.submit()

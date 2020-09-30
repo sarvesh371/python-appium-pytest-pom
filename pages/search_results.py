@@ -16,11 +16,23 @@ class SearchResults:
         """
         self.webDriver = web_driver
         self.locators = dict_to_ns({
-            "resultsName": "//*[@class='_2cLu-l']",
-            "resultsPrice": "%s/../a[3]/div/div[1]",
-            "searchResultsPage": "//span[contains(text(), 'Showing ')]",
+            "results": "//*[@class='android.widget.ScrollView']/android.view.ViewGroup/android.view.ViewGroup",
+            "resultsName": "//*[@class='android.widget.ScrollView']/android.view.ViewGroup/android.view.ViewGroup[%s]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView[1]",
+            "resultsPrice": "//*[@class='android.widget.ScrollView']/android.view.ViewGroup/android.view.ViewGroup[%s]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView[3]",
+            "searchResultsPage": "//*[@text='Filter']",
+            "locationPopup": "com.flipkart.android:id/permission_title",
+            "notNow": "com.flipkart.android:id/not_now_button",
         })
         self.logger = Logger(name="RESULTS").get_logger
+
+    def close_location_pop_up(self):
+        """
+        Close the location popup
+        :return:
+        """
+        self.webDriver.explicit_visibility_of_element(element=self.locators.locationPopup, locator_type='id',
+                                                      time_out=60)
+        self.webDriver.click(element=self.locators.notNow, locator_type='id')
 
     def print_search_results(self):
         """
@@ -29,10 +41,11 @@ class SearchResults:
         """
         self.webDriver.explicit_visibility_of_element(element=self.locators.searchResultsPage, locator_type='xpath',
                                                       time_out=60)
-        results_name = self.webDriver.get_elements(element=self.locators.resultsName, locator_type='xpath')
-        results_price = self.webDriver.get_elements(element=self.locators.resultsPrice % self.locators.resultsName,
-                                                    locator_type='xpath')
-        for _result in results_name:
-            name = _result.text
-            price = results_price[results_name.index(_result)].text
+        results = self.webDriver.get_elements(element=self.locators.results, locator_type='xpath')
+        for _result in results:
+            index = results.index(_result) + 2
+            if index > len(results):
+                break
+            name = self.webDriver.get_text(element=self.locators.resultsName % index, locator_type='xpath')
+            price = self.webDriver.get_text(element=self.locators.resultsPrice % index, locator_type='xpath')
             self.logger.info(f'Device Name - {name} | Price - {price}')
