@@ -87,8 +87,8 @@ class WebDriver:
                     'platformName': 'Android',
                     'platformVersion': str(run_cmd('adb shell getprop ro.build.version.release').output).strip(),
                     'deviceName': get_adb_device()[0],
-                    'appPackage': 'com.flipkart.android',
-                    'appActivity': 'com.flipkart.android.activity.HomeFragmentHolderActivity',
+                    'appPackage': 'com.flipkart',
+                    'appActivity': '.MainActivity',
                     'INSTALL_GRANT_RUNTIME_PERMISSIONS': True,
                     'newCommandTimeout': 300,
                     'app': apk_path

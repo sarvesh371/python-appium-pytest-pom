@@ -22,7 +22,7 @@ This is a framework repo for automating mobile application using python with pyt
     ` pytest tests`
 
 **Project Structure**
-1. base - It contains all the web/appium drivers, common functions and workers functions
+1. base - It contains all the appium drivers, common functions and workers functions
 2. resources - It contains all the apk's and url configurations which will be used throughout the project
 3. pages - It contains all the pages class and their methods to implement POM
 4. tests - It contains the test class which needs to be triggered
