@@ -1,7 +1,6 @@
 __author__ = "sarvesh.singh"
 
-from base.common import dict_to_ns
-from base.logger import Logger
+from base.common import dict_to_ns, basic_logging
 
 
 class SearchResults:
@@ -23,7 +22,7 @@ class SearchResults:
             "locationPopup": "com.flipkart.android:id/permission_title",
             "notNow": "com.flipkart.android:id/not_now_button",
         })
-        self.logger = Logger(name="RESULTS").get_logger
+        self.logger = basic_logging(name="SEARCH", level='INFO')
 
     def close_location_pop_up(self):
         """
